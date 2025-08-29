@@ -18,6 +18,12 @@ app.route("/").get((req, res) => {
 app.route("/employees").get((req, res) => {
   res.send(employees);
 });
+app.route("/employees/random").get((req, res) => {
+  const index = Math.floor(Math.random() * employees.length);
+  const randomEmployee = employees[index];
+  res.status(200).json(randomEmployee);
+});
+
 app.route("/employees/:id").get((req, res) => {
   const { id } = req.params;
   console.log(id);
@@ -28,8 +34,9 @@ app.route("/employees/:id").get((req, res) => {
   }
   res.status(200).send(employee);
 });
-app.route("/employees/random").get((req, res) => {
-  const index = Math.floor(Math.random() * employees.length);
-  const randomEmployee = employees[index];
-  res.status(200).json(randomEmployee);
-});
+// app.route("/employees/random").get((req, res) => {
+//   const index = Math.floor(Math.random() * employees.length);
+//   const randomEmployee = employees[index];
+//   res.status(200).json(randomEmployee);
+// });
+// The random employee route had to go before the ID section for it to work correctly
